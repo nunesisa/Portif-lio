@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title> Portfólio</title>
+  <style>
+    :root{
+      --bg-1: #08060a;
+      --bg-2: #0f0710;
+      --card: rgba(255,255,255,0.03);
+      --neon: #ff2d95; /* rosa neon */
+      --glass: rgba(255,255,255,0.04);
+      --accent-glow: 0 0 20px rgba(255,45,149,0.15), 0 0 50px rgba(255,45,149,0.06);
+      --radius: 14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#e9e7ee}
+    body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+    /* Top interactive leading nav */
+    .topbar{
+      position:fixed;left:0;right:0;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:18px 36px;backdrop-filter:blur(6px);
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand .logo{
+      width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#0f0a12, #271226);display:flex;align-items:center;justify-content:center;box-shadow:var(--accent-glow);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .brand .logo::after{content:'Isa';font-weight:700;font-size:12px;color:var(--neon)}
+
+    nav ul{list-style:none;padding:0;margin:0;display:flex;gap:18px;align-items:center}
+    nav a{color:rgba(255,255,255,0.85);text-decoration:none;padding:8px 10px;border-radius:8px;position:relative;font-weight:600}
+    nav a:hover{color:var(--neon)}
+    nav a::after{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:0;height:3px;border-radius:6px;background:var(--neon);transition:width .28s ease}
+    nav a.active, nav a:focus{color:var(--neon)}
+    nav a.active::after{width:60%}
+
+    /* Hero / Leading page */
+    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 480px;gap:40px;align-items:center;padding:120px 6vw}
+    .hero .copy{max-width:720px}
+    h1{font-size:48px;margin:0 0 12px;line-height:1.02}
+    p.lead{opacity:0.9;margin:0 0 22px;font-size:18px}
+
+    /* neon decorative lines */
+    .neon-line{
+      height:3px;background:linear-gradient(90deg, transparent, var(--neon), transparent);box-shadow:0 0 14px rgba(255,45,149,0.12);margin:18px 0;border-radius:6px;}
+
+    /* Profile card */
+    .profile-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:28px;border-radius:var(--radius);box-shadow:var(--accent-glow);border:1px solid rgba(255,255,255,0.04);display:flex;flex-direction:column;gap:18px}
+    .avatar-wrap{display:flex;align-items:center;gap:16px}
+    .avatar{
+      width:142px;height:142px;border-radius:50%;overflow:hidden;border:4px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;position:relative;
+      box-shadow:0 6px 30px rgba(0,0,0,0.6), 0 0 22px rgba(255,45,149,0.08);
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .avatar::after{content:'';position:absolute;inset:0;border-radius:50%;box-shadow:0 0 28px var(--neon);mix-blend-mode:screen;opacity:0.9;pointer-events:none}
+    .info h2{margin:0;font-size:20px}
+    .info p{margin:6px 0 0;color:rgba(255,255,255,0.65)}
+
+    /* sections */
+    section{padding:80px 6vw;border-top:1px solid rgba(255,255,255,0.02)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .project-thumb{height:140px;border-radius:8px;background:linear-gradient(135deg, rgba(255,45,149,0.08), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-weight:700}
+
+    /* skills */
+    .skill{margin-bottom:12px}
+    .skill .bar{height:12px;background:rgba(255,255,255,0.06);border-radius:8px;overflow:hidden}
+    .skill .fill{height:100%;width:0;background:linear-gradient(90deg,var(--neon), #ff7ab5);box-shadow:0 6px 24px rgba(255,45,149,0.12);transition:width .9s cubic-bezier(.2,.9,.3,1)}
+
+    /* contact */
+    .contact-form{display:grid;gap:12px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:#fff;outline:none}
+    input:focus,textarea:focus{border-color:var(--neon);box-shadow:0 0 18px rgba(255,45,149,0.08)}
+    button.cta{background:linear-gradient(90deg,var(--neon), #ff8ab8);border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+
+    /* footer */
+    footer{padding:40px 6vw;text-align:center;color:rgba(255,255,255,0.5)}
+
+    /* responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr;padding:120px 4vw}
+      nav ul{gap:10px}
+      .grid-3{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:560px){
+      .grid-3{grid-template-columns:1fr}
+      h1{font-size:32px}
+    }
+
+    /* floating neon decorative lines */
+    .decor-left{position:fixed;left:22px;top:40%;width:2px;height:220px;background:linear-gradient(180deg, transparent, var(--neon));box-shadow:0 0 30px rgba(255,45,149,0.14);transform:rotate(8deg);opacity:0.9}
+    .decor-right{position:fixed;right:22px;top:20%;width:2px;height:300px;background:linear-gradient(180deg, var(--neon), transparent);box-shadow:0 0 30px rgba(255,45,149,0.12);transform:rotate(-8deg)}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden></div>
+      <div>
+        <div style="font-weight:700">Isabela Brandão Nunes</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5)">Portfólio de projetos</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#sobre" class="navlink active">Experiência</a></li>
+        <li><a href="#projetos" class="navlink">Projetos</a></li>
+        <li><a href="#habilidades" class="navlink">Habilidades</a></li>
+        <li><a href="#contatos" class="navlink">Contatos</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="decor-left"></div>
+  <div class="decor-right"></div>
+
+  <main>
+    <header class="hero">
+      <div class="copy">
+        <h1>Meu Portifólio<br><span style="color:var(--neon)">Analista e Desenvolvedora de sistemas</span></h1>
+        <p class="lead">Sou formada em Análise e Desenvolvimento de Sistemas, apaixonada por criar soluções práticas e interfaces intuitivas. Busco unir lógica e design para transformar ideias em experiências digitais completas.</p>
+
+        <div class="neon-line" aria-hidden></div>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <a href="#projetos" class="cta" style="text-decoration:none;color:#0b0b0b;background:var(--neon);padding:12px 16px;border-radius:10px;font-weight:700">Ver projetos</a>
+          <a href="#contatos" style="color:rgba(255,255,255,0.9);text-decoration:none;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)">Entrar em contato</a>
+        </div>
+
+      </div>
+
+      <aside class="profile-card">
+        <div class="programadora-wrap">
+          <div class="programadora">
+            <!-- Substitua o src abaixo pela sua foto. Exemplo: /mnt/data/1699631454268.jpg -->
+            <img src="1699631454268.jpg" alt="Foto de Isa" style="height:140px; border-radius:50%;  border:4px solid rgba(253, 2, 149, 0.06); display:flex;  align-items:center; justify-content:center; box-shadow:
+    0 0 30px rgba(248, 29, 139, 0.6),
+    0 0 35px rgba(250, 105, 214, 0.3),
+    0 0 45px rgba(238, 236, 236, 0.2); position:relative;"
+     />     
+
+          </div>
+          <div class="info">
+            <h2>Isabela Brandão Nunes</h2>
+            <p>Sou Desenvolvedora de Sistemas, apaixonada por criar experiências digitais envolventes e visualmente impactantes. 
+              Possuo sólidas habilidades em programação front-end (HTML, CSS, JavaScript), criação de artes gráficas e comunicação visual. 
+              Além disso, trago conhecimentos também na área dp back-end, com linguagem Python, e experiência na geração e manipulação de imagens com Inteligência Artificial. 
+              Busco oportunidades para aplicar e aprimorar minhas habilidades como desenvolvedora.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">CSS</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">JavaScript</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">Python</div>
+        </div>
+
+      </aside>
+    </header>
+
+    <section id="experiencia">
+      <div style="max-width:980px;margin:0 auto;display:flex;gap:28px;align-items:flex-start;">
+        <div style="flex:1">
+          <h2>Experiências</h2>
+          <ul>
+             <h3>Técnico de informática - SEINFRA(2022-2025)</h3>
+            <li>Manutenção e suporte em máquinas</li>
+            <li>Formatação, backup e maniulação de dados</li>
+            <li>Instalação e suporte em programas</li>
+            <li>Metodologias Ágeis</li>
+            <li>Manipulação de imagens com IA</li>
+            <li>Criação de artes gráficas</li>
+            <li>Resolução e apropriação de chamados</li>
+          </ul>
+
+           <ul>
+             <h3>Web Designer - Profissional Liberal(2024-2025)</h3>
+            <li>Criação de landing page</li>
+            <li>Levantamento de requisitos</li>
+            <li>Desenvolvimento de layouts</li>
+            <li>Metodologias Ágeis</li>
+            <li>Manipulação de imagens com IA</li>
+            <li>Criação de artes gráficas</li>
+          </ul>
+          
+        </div>
+        <div style="width:320px">
+          <div class="card">
+            <strong>Localização</strong>
+            <p style="margin:4px 0 0;color:rgba(255,255,255,0.6)">Salvador - BA, São Cristovão</p>
+            <div style="height:12px"></div>
+            <strong>Disponibilidade</strong>
+            <p style="margin:4px 0 0;color:rgba(255,255,255,0.6)">Imediato</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div style="max-width:1100px;margin:0 auto">
+        <h2>Projetos</h2>
+        <div class="neon-line"></div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="project-thumb">Projeto 1 — Ilustração editorial</div>
+            <h3 style="margin-top:12px">Ilustração de pessoa</h3>
+            <p style="opacity:0.8">Estudo de retrato com paleta luxuosa e traço detalhado.</p>
+          </div>
+
+          <div class="card">
+            <div class="project-thumb">Projeto 2 — Identidade</div>
+            <h3 style="margin-top:12px">Marca para loja</h3>
+            <p style="opacity:0.8">Logomarca e aplicações para e-commerce de presentes.</p>
+          </div>
+
+          <div class="card">
+            <div class="project-thumb">Projeto 3 — Estampa</div>
+            <h3 style="margin-top:12px">Arte para camisa</h3>
+            <p style="opacity:0.8">Desenho para estamparia com enfoque em tipografia criativa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="habilidades">
+      <div style="max-width:1000px;margin:0 auto">
+        <h2>Habilidades</h2>
+        <div class="neon-line"></div>
+        <div style="display:flex;gap:18px;align-items:flex-start">
+          <div style="flex:1">
+            <div class="skill">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px"><strong>Relacionamento com usuário</strong><span>100%</span></div>
+              <div class="bar"><div class="fill" style="width:100%"></div></div>
+            </div>
+            <div class="skill">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px"><strong>Proatividade</strong><span>93%</span></div>
+              <div class="bar"><div class="fill" style="width:93%"></div></div>
+            </div>
+            <div class="skill">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px"><strong>Trabalho em equipe</strong><span>90%</span></div>
+              <div class="bar"><div class="fill" style="width:90%"></div></div>
+            </div>
+          </div>
+          <div style="width:320px">
+            <div class="card">
+              <strong>Ferramentas</strong>
+              <ul style="margin:8px 0 0;padding-left:18px;color:rgba(255,255,255,0.8)">
+                <li>Corew Draw</li>
+                <li>Photoshop</li>
+                <li>Figma</li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contatos">
+      <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start">
+        <div>
+          <h2>Contatos</h2>
+          <p class="lead">Quer trabalhar comigo? Mande uma mensagem — respondo rápido.</p>
+          <form class="contact-form" onsubmit="event.preventDefault();alert('Mensagem enviada — exemplo');">
+            <input type="text" placeholder="Seu nome" required />
+            <input type="email" placeholder="Email" required />
+            <textarea rows="6" placeholder="Mensagem"></textarea>
+            <div style="display:flex;gap:10px"><button class="cta" type="submit">Enviar</button><a href="mailto:seu@email.com" style="align-self:center;color:rgba(255,255,255,0.8)">Ou envie por email</a></div>
+          </form>
+        </div>
+        <aside class="card">
+          <strong>Redes</strong>
+          <p style="margin:8px 0 0;color:rgba(255,255,255,0.6)">Instagram · Behance · LinkedIn</p>
+          <div style="height:14px"></div>
+          <strong>Telefone</strong>
+          <p style="margin:8px 0 0;color:rgba(255,255,255,0.6)">(xx) xxxxx-xxxx</p>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Isa • Design & Ilustração
+    </footer>
+  </main>
+
+  <script>
+    // smooth scroll
+    document.querySelectorAll('a.navlink').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        document.querySelectorAll('a.navlink').forEach(x=>x.classList.remove('active'));
+        a.classList.add('active');
+        const id = a.getAttribute('href');
+        document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
+      })
+    })
+
+    // highlight on scroll (simple scrollspy)
+    const sections = document.querySelectorAll('main section');
+    window.addEventListener('scroll', ()=>{
+      let fromTop = window.scrollY + 120;
+      sections.forEach(section=>{
+        if(section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop){
+          const id = '#'+section.id;
+          document.querySelectorAll('a.navlink').forEach(a=>a.classList.remove('active'));
+          const active = document.querySelector('a.navlink[href="'+id+'"]');
+          if(active) active.classList.add('active');
+        }
+      })
+    })
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // animate skill bars on load
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.fill').forEach(el=>{
+        const w = el.style.width;
+        el.style.width = '0%';
+        setTimeout(()=> el.style.width = w, 150);
+      })
+    })
+  </script>
+</body>
+</html>
