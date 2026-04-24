@@ -193,180 +193,244 @@
     </section>
 
     <section id="projetos">
-       <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+      <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Projetos</title>
 
-    body {
-      background: #0a0a0f;
-      color: #fff;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-    .projects-section {
-      padding: 60px 8%;
-    }
+body {
+  background: #0a0a0f;
+  color: #fff;
+}
 
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #ff2d75;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
+/* SEÇÃO */
+.projects-section {
+  padding: 60px 8%;
+}
 
-    .carousel {
-      position: relative;
-      overflow: hidden;
-    }
+.section-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ff2d75;
+  display: inline-block;
+}
 
-    .carousel-track {
-      display: flex;
-      gap: 20px;
-      transition: transform 0.5s ease;
-    }
+/* CARROSSEL */
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
 
-    .project-card {
-      min-width: 300px;
-      max-width: 300px;
-      background: linear-gradient(145deg, #1a1a2e, #111);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(255, 45, 117, 0.2);
-      transition: 0.3s;
-    }
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: 0.5s;
+}
 
-    .project-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 0 25px rgba(255, 45, 117, 0.6);
-    }
+/* CARD */
+.project-card {
+  min-width: 300px;
+  background: linear-gradient(145deg, #1a1a2e, #111);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #ff2d75;
+}
 
-    .project-info {
-      padding: 15px;
-    }
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
 
-    .project-info h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
+.project-info {
+  padding: 15px;
+}
 
-    .project-info p {
-      font-size: 14px;
-      color: #ccc;
-    }
+/* BOTÕES */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 45, 117, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
 
-    .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 45, 117, 0.2);
-      border: none;
-      color: #fff;
-      font-size: 24px;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
-      backdrop-filter: blur(5px);
-    }
+.prev { left: 0; }
+.next { right: 0; }
 
-    .nav:hover {
-      background: #ff2d75;
-    }
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
 
-    .prev {
-      left: -10px;
-    }
+.modal-content {
+  background: #111;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 30px #ff2d75;
+}
 
-    .next {
-      right: -10px;
-    }
+.modal img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
 
-    /* RESPONSIVO */
-    @media (max-width: 768px) {
-      .project-card {
-        min-width: 250px;
-      }
-    }
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 28px;
+  cursor: pointer;
+}
 
-  </style>
+/* BOTÃO GITHUB */
+.btn {
+  margin-top: 15px;
+  display: inline-block;
+  padding: 10px 20px;
+  background: #ff2d75;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #ff5c9a;
+}
+
+</style>
 </head>
 
 <body>
 
-  <section class="projects-section">
-    <h2 class="section-title">Projetos</h2>
+<section class="projects-section">
+  <h2 class="section-title">Projetos</h2>
 
-    <div class="carousel">
+  <div class="carousel">
+    <button class="nav prev">&#10094;</button>
 
-      <button class="nav prev">&#10094;</button>
+    <div class="carousel-track">
 
-      <div class="carousel-track">
-
-        <div class="project-card">
-          <img src="img/projeto1.png" alt="Projeto 1">
-          <div class="project-info">
-            <h3>Clínica Fisioclin - Chatbot</h3>
-            <p>Chatbot inteligente desenvolvido em Python para atendimento automatizado.</p>
-          </div>
+      <div class="project-card"
+           onclick="openModal(
+             'Clínica Fisioclin',
+             'Chatbot em Python para clínica médica.',
+             'img/projeto1.png',
+             'https://github.com/seu-repo1'
+           )">
+        <img src="img/projeto1.png">
+        <div class="project-info">
+          <h3>Fisioclin Chatbot</h3>
         </div>
-
-        <div class="project-card">
-          <img src="img/projeto2.png" alt="Projeto 2">
-          <div class="project-info">
-            <h3>Tela de Cadastro</h3>
-            <p>Interface moderna desenvolvida com HTML e CSS focada em UX.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <img src="img/projeto3.png" alt="Projeto 3">
-          <div class="project-info">
-            <h3>Dashboard Analytics</h3>
-            <p>Visualização de dados com foco em clareza e performance.</p>
-          </div>
-        </div>
-
       </div>
 
-      <button class="nav next">&#10095;</button>
+      <div class="project-card"
+           onclick="openModal(
+             'Tela de Cadastro',
+             'Interface moderna com foco em UX.',
+             'img/projeto2.png',
+             'https://github.com/seu-repo2'
+           )">
+        <img src="img/projeto2.png">
+        <div class="project-info">
+          <h3>Cadastro UX</h3>
+        </div>
+      </div>
+
+      <div class="project-card"
+           onclick="openModal(
+             'Dashboard',
+             'Sistema de análise de dados.',
+             'img/projeto3.png',
+             'https://github.com/seu-repo3'
+           )">
+        <img src="img/projeto3.png">
+        <div class="project-info">
+          <h3>Analytics</h3>
+        </div>
+      </div>
+
     </div>
-  </section>
 
-  <script>
-    const track = document.querySelector('.carousel-track');
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
+    <button class="nav next">&#10095;</button>
+  </div>
+</section>
 
-    let position = 0;
-    const cardWidth = 320;
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
 
-    nextBtn.addEventListener('click', () => {
-      position -= cardWidth;
-      if (Math.abs(position) >= track.scrollWidth - window.innerWidth) {
-        position = 0;
-      }
-      track.style.transform = `translateX(${position}px)`;
-    });
+  <div class="modal-content">
+    <img id="modal-img">
+    <h2 id="modal-title"></h2>
+    <p id="modal-desc"></p>
+    <a id="modal-link" class="btn" target="_blank">Ver no GitHub</a>
+  </div>
+</div>
 
-    prevBtn.addEventListener('click', () => {
-      position += cardWidth;
-      if (position > 0) {
-        position = -(track.scrollWidth - window.innerWidth);
-      }
-      track.style.transform = `translateX(${position}px)`;
-    });
-  </script>
+<script>
+const track = document.querySelector('.carousel-track');
+let position = 0;
+
+document.querySelector('.next').onclick = () => {
+  position -= 320;
+  track.style.transform = `translateX(${position}px)`;
+};
+
+document.querySelector('.prev').onclick = () => {
+  position += 320;
+  track.style.transform = `translateX(${position}px)`;
+};
+
+/* MODAL */
+function openModal(title, desc, img, link) {
+  document.getElementById('modal').style.display = 'flex';
+  document.getElementById('modal-title').innerText = title;
+  document.getElementById('modal-desc').innerText = desc;
+  document.getElementById('modal-img').src = img;
+  document.getElementById('modal-link').href = link;
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+</script>
 
 </body>
+</html>
     </section>
 
     <section id="habilidades">
