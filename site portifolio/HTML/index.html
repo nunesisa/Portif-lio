@@ -345,7 +345,7 @@ body {
     <div class="carousel-track">
 
       <div class="project-card"
-           onclick="openModalFigma(
+           onclick="openModal2(
              'Sistema de Trânsito (SMT)',
              'Pótotipo feito no FIGMA para um sistema de multa de trânsito, feito para o Governo do estado da Bahia',
              'Captura de tela 2026-03-09 140713.png',
@@ -397,11 +397,21 @@ body {
     <img id="modal-img">
     <h2 id="modal-title"></h2>
     <p id="modal-desc"></p>
-    <a id="modal-github" class="btn" target="_blank">GitHub</a>
-<a id="modal-figma" class="btn btn-figma" target="_blank">Figma</a>
+   <a id="modal-link" class="btn" target="_blank">Ver no GitHub</a>
+<button class="btn btn-secondary" onclick="closeModal()">Voltar aos projetos</button>
+</div>
+  </div>
+</div>
 
-<div style="margin-top:15px;">
-  <button class="btn btn-secondary" onclick="closeModal()">← Voltar</button>
+  <div class="modal2" id="modal2">
+  <span class="close" onclick="closeModal2()">&times;</span>
+
+  <div class="modal-content">
+    <img id="modal-img">
+    <h2 id="modal-title"></h2>
+    <p id="modal-desc"></p>
+   <a id="modal-link" class="btn" target="_blank">Ver no Figma</a>
+<button class="btn btn-secondary" onclick="closeModal()">Voltar aos projetos</button>
 </div>
   </div>
 </div>
