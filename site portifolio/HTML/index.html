@@ -19,6 +19,10 @@
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#e9e7ee}
     body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 
+html, body {
+  overflow-x: hidden;
+}
+
     /* Top interactive leading nav */
     .topbar{
       position:fixed;left:0;right:0;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:18px 36px;backdrop-filter:blur(6px);
@@ -122,7 +126,7 @@
   <main>
     <header class="hero">
       <div class="copy">
-        <h1>Meu Portifólio<br><span style="color:var(--neon)">Analista e Desenvolvedora de sistemas</span></h1>
+        <h1>Conheça meu Portifólio<br><span style="color:var(--neon)">Product Designer | Front-End</span></h1>
         <p class="lead">Sou apaixonada por criar soluções práticas e interfaces intuitivas. Busco unir lógica e design para transformar ideias em experiências digitais completas.</p>
 
         <div class="neon-line" aria-hidden></div>
@@ -157,7 +161,9 @@
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">CSS</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">JavaScript</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">React</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">Python</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">Figma</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">HTML</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">Power BI</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)">SQL</div>
@@ -180,7 +186,7 @@
             <li>Planejamento e melhoria da experiência do usuário</li>
             <li>Levantamento de Requisitos</li>
           </ul>
-<p></p>
+<p>_______________________________________________________________________________________________</p>
            <ul>
              <h3>Técnico de informática - SEINFRA(2022-2024)</h3>
             <li>Manutenção e Correção de Sistemas Web</li>
@@ -205,6 +211,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-width: 100%;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -215,7 +222,9 @@ body {
 
 /* SEÇÃO */
 .projects-section {
-  padding: 80px 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .section-title {
@@ -230,6 +239,7 @@ body {
   position: relative;
   justify-content: center;
   margin: 0 auto;
+  padding-left: 0;
 }
 
 .carousel-track {
@@ -276,17 +286,21 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 10;
   background: rgba(255, 45, 117, 0.2);
   border: none;
   color: #fff;
   font-size: 24px;
   padding: 10px;
   cursor: pointer;
-  border-radius: 30%;
+  border-radius: 40%;
+  z-index: 10;
 }
 
-.prev { left: 0; }
-.next { right: 0; }
+.prev { left: -600px; 
+}
+.next { right:  -600px; 
+}
   
 /* MODAL */
 .modal {
@@ -346,7 +360,7 @@ body {
 
 <body>
 
-<section class="projects-section">
+<section class="projects-section"> 
   <h2 class="section-title">Projetos</h2>
 
   <div class="carousel">
@@ -518,16 +532,17 @@ function closeModal() {
         </div>
         <aside class="card">
           <strong>Redes</strong>
-          <p style="margin:8px 0 0;color:rgba(255,255,255,0.6)">LinkedIn | GitHub</p>
+         <p><a href="https://github.com/nunesisa" style="align-self:center;color:rgba(255,255,255,0.8)">GitHub</a></p> 
+         <a href="https://www.linkedin.com/in/isabela-brandaoo/" style="align-self:center;color:rgba(255,255,255,0.8)">Linkedin</a>
           <div style="height:14px"></div>
-          <strong>Telefone</strong>
+          <p>Telefone</p>
           <p style="margin:8px 0 0;color:rgba(255,255,255,0.6)">(71) 98470-9640</p>
         </aside>
       </div>
     </section>
 
     <footer>
-      © <span id="year"></span> Isabela Brandão Nunes
+     <span id="year"></span> Isabela Brandão Nunes
     </footer>
   </main>
 
@@ -571,8 +586,3 @@ function closeModal() {
   </script>
 </body>
 </html>
-
-
-
-
-
