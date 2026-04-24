@@ -234,6 +234,7 @@ body {
 /* CARROSSEL */
 .carousel {
   position: relative;
+  overflow: hidden;
   margin: 0 auto;
 }
 
@@ -250,6 +251,13 @@ body {
 
 /* CARD */
 .project-card {
+  min-width: 300px;
+  max-width: 300px;
+  background: linear-gradient(145deg, #1a1a2e, #111);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(255, 45, 117, 0.2);
+  transition: 0.3s;
   min-width: 280px;
   flex: 0 0 280px;
 }
